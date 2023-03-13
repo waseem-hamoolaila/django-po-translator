@@ -119,10 +119,6 @@ USE_TZ = True
 # Dummy gettext function
 gettext = lambda s: s
 
-LANGUAGES = [
-    ("en", gettext("en")),
-    ("ar", gettext("ar")),
-]
 
 
 # Static files (CSS, JavaScript, Images)
