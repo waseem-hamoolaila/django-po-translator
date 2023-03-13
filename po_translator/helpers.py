@@ -1,5 +1,8 @@
+import os
+from django.conf import settings
 from .translate import translate_text
 
+import po_translator.app_settings as app_settings
 
 def process_lines(lines, lan, update_already_translated=False):
     """
@@ -86,4 +89,49 @@ def fetch_translation(text, lan):
 
 
 
+def action(command):
+    """ 
+    Apply the actions into the PO files
+    
+    args 
+    - command: the command that is calling this function
+    
+    return bool, string
+    """
+    
+    languages = None
+    try:
+        languages = [language[0] for language in settings.LANGUAGES]
+    except:
+        return False, "No languages detect in the project, make sure LANGUAGES is defined in project settings"
+    
+    po_files_paths = []
+    for language in languages: 
+        if os.path.exists(os.path.join(os.getcwd(), 'locale', language, 'LC_MESSAGES', app_settings.PO_FILES_NAME)):
+            po_file = os.path.join(os.getcwd(), 'locale', language, 'LC_MESSAGES', app_settings.PO_FILES_NAME)
+            po_files_paths.append((po_file, language))
+    
+    if not po_files_paths:
+        return False, "No po files detected in the project."
+        
+        
+    # Update all the po files
+    for po_file_details in po_files_paths:
+        
+        po_file_path = po_file_details[0]
+        po_file_language = po_file_details[1]
+        
+        lines = None
+        with open(po_file_path, 'r', encoding='utf-8') as po_file:
+            lines = po_file.readlines()
+                
+        if lines:
+            with open(po_file_path, 'w', encoding='utf-8') as po_file:
+                processed_list = process_lines(lines=lines, lan=po_file_language)
+                for line in processed_list:
+                    po_file.write(line)
+        else:
+            command.stdout.write(f"{po_file_language} Po file is empty .. no translations were added.")
 
+        
+    return True, "Completed"

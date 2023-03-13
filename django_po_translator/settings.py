@@ -119,6 +119,10 @@ USE_TZ = True
 # Dummy gettext function
 gettext = lambda s: s
 
+LANGUAGES = (
+    ("ar", gettext("ar")), 
+    ("en", gettext("en"))
+)
 
 
 # Static files (CSS, JavaScript, Images)
