@@ -1,5 +1,4 @@
-from google.cloud import translate_v2 as translate
-
+from .translate import translate_text
 
 
 def process_lines(lines, lan, update_already_translated=False):
@@ -17,19 +16,22 @@ def process_lines(lines, lan, update_already_translated=False):
             # update even if the msgstr already provided
             if update_already_translated:
                 msgid = get_msgid(lines, msgstr_index=index)
-                translated_string = translate(string=msgid, lan=lan)
+                translated_string = fetch_translation(string=msgid, lan=lan)
                 processed_lines.append('msgstr "' + translated_string + '"\n' )
                 
             else:
                 msgstr = get_str(line)
-                if msgstr != '':
-                    translated_string = translate(string=get_str(line), lan=lan)
-        
+                if msgstr == '':
+                    msgid = get_msgid(lines, msgstr_index=index)
+                    translated_string = fetch_translation(string=msgid, lan=lan)
+                    processed_lines.append('msgstr "' + translated_string + '"\n' )
+                    
+                else:
+                    processed_lines.append(line)
         else:
-            process_lines.append(line)
-                
+            processed_lines.append(line)
     
-    return lines
+    return processed_lines
 
 def is_message_id(line) -> bool:
     """ 
@@ -67,15 +69,21 @@ def get_str(line):
 def get_msgid(lines, msgstr_index):
     """ Return the msgid of a given msgstr index """
     try:
+        print(lines[msgstr_index - 1].split('"')[1] )
         return lines[msgstr_index - 1].split('"')[1] if lines[msgstr_index - 1].split('"')[1] != '"' else None
     except:
         raise ValueError("Not valid msgstr index.")
     
     
-def translate(string, lan):
+def fetch_translation(string, lan):
     """ Translate the giving word """
-    translate_client = translate.Client()
-    result = translate_client.translate(string, target_language=lan)
+    if string != "":
+        # Translate some text
+        result = translate_text(text=string, target_language=lan)
+        return result if result else ''
     
-    return result['translatedText'] if result['translatedText'] else ''
+    return ''
+
+
+
 

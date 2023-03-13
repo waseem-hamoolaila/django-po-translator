@@ -28,7 +28,7 @@ class Command(BaseCommand):
         if lines:
             with open(po_file_path, 'w', encoding='utf-8') as po_file:
                 
-                print(process_lines(lines=lines))
+                print(process_lines(lines=lines, lan='ar'))
                 for line in lines:
                     po_file.write(line)
         else:
