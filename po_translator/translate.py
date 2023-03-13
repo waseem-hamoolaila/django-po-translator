@@ -1,7 +1,7 @@
 import urllib.parse
 import urllib.request
 from bs4 import BeautifulSoup
-import app_settings
+import po_translator.app_settings as app_settings
 
 def translate_text(text, target_language):
     
