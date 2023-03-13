@@ -16,15 +16,15 @@ def process_lines(lines, lan, update_already_translated=False):
             # update even if the msgstr already provided
             if update_already_translated:
                 msgid = get_msgid(lines, msgstr_index=index)
-                translated_string = fetch_translation(string=msgid, lan=lan)
-                processed_lines.append('msgstr "' + translated_string + '"\n' )
+                translated_text = fetch_translation(text=msgid, lan=lan)
+                processed_lines.append('msgstr "' + translated_text + '"\n' )
                 
             else:
                 msgstr = get_str(line)
                 if msgstr == '':
                     msgid = get_msgid(lines, msgstr_index=index)
-                    translated_string = fetch_translation(string=msgid, lan=lan)
-                    processed_lines.append('msgstr "' + translated_string + '"\n' )
+                    translated_text = fetch_translation(text=msgid, lan=lan)
+                    processed_lines.append('msgstr "' + translated_text + '"\n' )
                     
                 else:
                     processed_lines.append(line)
@@ -75,11 +75,11 @@ def get_msgid(lines, msgstr_index):
         raise ValueError("Not valid msgstr index.")
     
     
-def fetch_translation(string, lan):
+def fetch_translation(text, lan):
     """ Translate the giving word """
-    if string != "":
+    if text != "":
         # Translate some text
-        result = translate_text(text=string, target_language=lan)
+        result = translate_text(text=text, target_language=lan)
         return result if result else ''
     
     return ''
