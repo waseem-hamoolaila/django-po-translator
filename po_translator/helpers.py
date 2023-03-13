@@ -1,5 +1,6 @@
 import os
 from django.conf import settings
+from django.core.management import BaseCommand
 from .translate import translate_text
 
 import po_translator.app_settings as app_settings
@@ -89,7 +90,7 @@ def fetch_translation(text, lan):
 
 
 
-def action(command):
+def action(command:BaseCommand):
     """ 
     Apply the actions into the PO files
     
@@ -134,4 +135,5 @@ def action(command):
             command.stdout.write(f"{po_file_language} Po file is empty .. no translations were added.")
 
         
-    return True, "Completed"
+    command.stdout.write(f"Completed ... {len(po_files_paths)} Po file/s have been processed")
+    return True, "Done"
