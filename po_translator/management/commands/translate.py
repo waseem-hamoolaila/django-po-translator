@@ -19,6 +19,20 @@ class Command(BaseCommand):
         
         po_file_path = os.path.join(os.getcwd(), 'locale', 'ar', 'LC_MESSAGES', 'django.po')
 
+        lines = None
         with open(po_file_path, 'r', encoding='utf-8') as po_file:
-            for line in po_file:
-                self.stdout.write(line.rstrip())
+            lines = po_file.readlines()
+
+        if lines:
+            with open(po_file_path, 'w', encoding='utf-8') as po_file:
+                for line in lines:
+                    if line.strip() == "waseem":
+                        modified_line = line.upper()
+                        po_file.write(modified_line)
+                        print("Hello")
+                    else:
+                        po_file.write(line)
+        else:
+            self.stdout.write("Po file is empty .. no translations were added.")
+                
+        
