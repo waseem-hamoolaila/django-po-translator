@@ -2,6 +2,8 @@ import os
 from django.core.management import BaseCommand
 from django.conf import settings  
 
+from po_translator.helpers import process_lines
+
 class Command(BaseCommand):
     
     help = 'Translate all PO files used in the project'
@@ -22,16 +24,13 @@ class Command(BaseCommand):
         lines = None
         with open(po_file_path, 'r', encoding='utf-8') as po_file:
             lines = po_file.readlines()
-
+                
         if lines:
             with open(po_file_path, 'w', encoding='utf-8') as po_file:
+                
+                print(process_lines(lines=lines))
                 for line in lines:
-                    if line.strip() == "waseem":
-                        modified_line = line.upper()
-                        po_file.write(modified_line)
-                        print("Hello")
-                    else:
-                        po_file.write(line)
+                    po_file.write(line)
         else:
             self.stdout.write("Po file is empty .. no translations were added.")
                 
