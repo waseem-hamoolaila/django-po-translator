@@ -27,9 +27,8 @@ class Command(BaseCommand):
                 
         if lines:
             with open(po_file_path, 'w', encoding='utf-8') as po_file:
-                
-                print(process_lines(lines=lines, lan='ar'))
-                for line in lines:
+                processed_list = process_lines(lines=lines, lan='ar')
+                for line in processed_list:
                     po_file.write(line)
         else:
             self.stdout.write("Po file is empty .. no translations were added.")

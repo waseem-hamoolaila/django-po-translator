@@ -20,20 +20,20 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 #: django_po_translator/settings.py:123
 msgid "en"
-msgstr ""
+msgstr "في"
 
 #: django_po_translator/settings.py:124
 msgid "ar"
-msgstr ""
+msgstr "أر"
 
 #: test_app/models.py:6
 msgid "Hello"
-msgstr ""
+msgstr "مرحبًا"
 
 #: test_app/models.py:9
 msgid "Test"
-msgstr ""
+msgstr "امتحان"
 
 #: test_app/models.py:10
 msgid "Tests"
-msgstr ""
+msgstr "الاختبارات"
