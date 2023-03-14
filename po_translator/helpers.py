@@ -148,8 +148,19 @@ def action(command:BaseCommand, translate_existed, resolve_fuzzy):
     return bool, string
     """
     
-    command.stdout.write(command.style.SUCCESS("Initial new process \n\n"))
-    command.stdout.write("Run make messages \n")
+    command.stdout.write(command.style.SUCCESS("\nInitial new process ... \n\n"))
+    
+    if translate_existed:
+        command.stdout.write(command.style.WARNING("NOTE: Existing translations will overridden"))
+    else:
+        command.stdout.write(command.style.WARNING("NOTE: Existing translations will not overridden, if you want to override pass --translate-existed"))
+        
+    if resolve_fuzzy:
+        command.stdout.write(command.style.WARNING("NOTE: Fuzzy translations will be resolved"))
+    else:
+        command.stdout.write(command.style.WARNING("NOTE: Fuzzy translations will be not resolved, if you want to resolve them pass --resolve-fuzzy"))
+        
+    command.stdout.write("\nRun make messages \n")
     
     os.system('python manage.py makemessages -a')
     command.stdout.write(command.style.SUCCESS("make messages ... Ok \n\n"))
