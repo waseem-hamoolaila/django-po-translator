@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.management import BaseCommand
 from .translate import translate_text
 from halo import Halo
+import time
 
 import django_po_translator.app_settings as app_settings
 
@@ -31,6 +32,9 @@ def process_lines(lines, lan, update_already_translated=False, resolve_fuzzy=Fal
                     else:
                         # msgstr already provided ... keep it as it is
                         processed_lines.append(line)
+                
+                time.sleep(2) # to avoid high demand on the server
+                    
             else:
                 processed_lines.append(line)
         
