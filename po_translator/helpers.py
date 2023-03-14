@@ -67,8 +67,8 @@ def clear_fuzziness(lines:list, lan):
         else:
             cleaned_list.append(line)
             
-    if len(indexes_to_be_removed) > 0:
-        cleaned_list = [cleaned_list[i] for i in range(len(cleaned_list)) if i not in indexes_to_be_removed]
+    if indexes_to_be_removed:
+        cleaned_list = [cleaned_list[i] for i in range(len(cleaned_list)) if i not in indexes_to_be_removed[1:]]
   
     return cleaned_list
     
