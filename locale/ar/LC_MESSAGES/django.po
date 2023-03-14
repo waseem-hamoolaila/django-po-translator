@@ -5,6 +5,7 @@
 #
 #, fuzzy
 msgid ""
+msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-14 06:32+0000\n"
@@ -20,19 +21,24 @@ msgid ""
 
 #: django_po_translator/settings.py:123
 msgid "ar"
+msgstr "أر"
 
 #: django_po_translator/settings.py:124
 msgid "en"
+msgstr "في"
 
 #: test_app/models.py:6
 msgid "Hello"
+msgstr "مرحبًا"
 
 #: test_app/models.py:7
-#, fuzzy
 msgid "Helo"
+msgstr "مرحبا"
 
 #: test_app/models.py:10
 msgid "Test"
+msgstr "امتحان"
 
 #: test_app/models.py:11
 msgid "Tests"
+msgstr "الاختبارات"

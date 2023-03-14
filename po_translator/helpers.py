@@ -19,23 +19,27 @@ def process_lines(lines, lan, update_already_translated=False, resolve_fuzzy=Fal
         if is_message_str(line):
             # update even if the msgstr already provided
             if update_already_translated:
-                msgid = get_msgid(lines, msgstr_index=index)
-                translated_text = fetch_translation(text=msgid, lan=lan)
-                processed_lines.append('msgstr "' + translated_text + '"\n' )
-                
+                processed_lines = translate_msgstr_line(processed_lines, lines, index, lan)    
             else:
                 msgstr = get_str(line)
                 if msgstr == '':
-                    msgid = get_msgid(lines, msgstr_index=index)
-                    translated_text = fetch_translation(text=msgid, lan=lan)
-                    processed_lines.append('msgstr "' + translated_text + '"\n' )
-                    
+                    processed_lines = translate_msgstr_line(processed_lines, lines, index, lan)
                 else:
+                    # msgstr already provided ... keep it as it is
                     processed_lines.append(line)
         else:
             processed_lines.append(line)
     
     return processed_lines
+
+
+def translate_msgstr_line(processed_lines:list, lines:list, index, lan):
+    msgid = get_msgid(lines, msgstr_index=index)
+    translated_text = fetch_translation(text=msgid, lan=lan)
+    processed_lines.append('msgstr "' + translated_text + '"\n' )
+    
+    return processed_lines
+
 
 def is_message_id(line) -> bool:
     """ 
