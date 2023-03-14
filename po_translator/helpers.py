@@ -2,6 +2,7 @@ import os
 from django.conf import settings
 from django.core.management import BaseCommand
 from .translate import translate_text
+import subprocess
 
 import po_translator.app_settings as app_settings
 
@@ -143,6 +144,8 @@ def action(command:BaseCommand, translate_existed, resolve_fuzzy):
     return bool, string
     """
     
+    os.system('python manage.py makemessages -a')
+    
     languages = None
     try:
         languages = [language[0] for language in settings.LANGUAGES]
@@ -182,5 +185,4 @@ def action(command:BaseCommand, translate_existed, resolve_fuzzy):
         
     command.stdout.write(f"Completed ... {len(po_files_paths)} Po file/s have been processed")
     
-    
-    return True, "Done"
+    return True, "sds"
