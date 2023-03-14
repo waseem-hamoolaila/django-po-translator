@@ -1,3 +1,3 @@
 recursive-include django_po_translator/templates *
 recursive-include django_po_translator/static *
-recursive-include django_po_translator/management *
+recursive-include django_po_translator/management/commands *
