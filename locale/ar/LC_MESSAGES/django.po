@@ -5,10 +5,9 @@
 #
 #, fuzzy
 msgid ""
-msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-13 09:55+0000\n"
+"POT-Creation-Date: 2023-03-14 06:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,22 +17,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
 #: django_po_translator/settings.py:123
-msgid "en"
-msgstr "في"
+msgid "ar"
 
 #: django_po_translator/settings.py:124
-msgid "ar"
-msgstr "أر"
+msgid "en"
 
 #: test_app/models.py:6
 msgid "Hello"
-msgstr "مرحبًا"
 
-#: test_app/models.py:9
-msgid "Test"
-msgstr "امتحان"
+#: test_app/models.py:7
+#, fuzzy
+msgid "Helo"
 
 #: test_app/models.py:10
+msgid "Test"
+
+#: test_app/models.py:11
 msgid "Tests"
-msgstr "الاختبارات"

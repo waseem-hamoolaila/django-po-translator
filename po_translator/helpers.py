@@ -5,7 +5,7 @@ from .translate import translate_text
 
 import po_translator.app_settings as app_settings
 
-def process_lines(lines, lan, update_already_translated=False):
+def process_lines(lines, lan, update_already_translated=False, resolve_fuzzy=False):
     """
     parse msgid and msgid and apply the translation to a new list
     
@@ -13,7 +13,7 @@ def process_lines(lines, lan, update_already_translated=False):
     """
     
     processed_lines = []
-    
+        
     for index, line in enumerate(lines):
     
         if is_message_str(line):
@@ -73,7 +73,6 @@ def get_str(line):
 def get_msgid(lines, msgstr_index):
     """ Return the msgid of a given msgstr index """
     try:
-        print(lines[msgstr_index - 1].split('"')[1] )
         return lines[msgstr_index - 1].split('"')[1] if lines[msgstr_index - 1].split('"')[1] != '"' else None
     except:
         raise ValueError("Not valid msgstr index.")
@@ -89,8 +88,15 @@ def fetch_translation(text, lan):
     return ''
 
 
+def is_fuzzy(lines, msgstr_index):
+    """ Determine whether this translation is fuzzy """
+    try:
+        return lines[msgstr_index - 2].split("\n")[0] == "#, fuzzy"
+    except:
+        return False
 
-def action(command:BaseCommand, translate_existed):
+
+def action(command:BaseCommand, translate_existed, resolve_fuzzy):
     """ 
     Apply the actions into the PO files
     
@@ -129,7 +135,8 @@ def action(command:BaseCommand, translate_existed):
         if lines:
             with open(po_file_path, 'w', encoding='utf-8') as po_file:
                 processed_list = process_lines(lines=lines, lan=po_file_language, 
-                                               update_already_translated=translate_existed)
+                                               update_already_translated=translate_existed, 
+                                               resolve_fuzzy=resolve_fuzzy)
                 for line in processed_list:
                     po_file.write(line)
         else:
@@ -137,4 +144,6 @@ def action(command:BaseCommand, translate_existed):
 
         
     command.stdout.write(f"Completed ... {len(po_files_paths)} Po file/s have been processed")
+    
+    
     return True, "Done"

@@ -11,6 +11,6 @@ def translate_text(text, target_language):
     response = urllib.request.urlopen(url)
     soup = BeautifulSoup(response, 'html.parser')
     
-    translated_text = soup.find('div', {'class': app_settings.GOGGLE_RESULT_DIV_CONTAINER_CLASS}).text
+    translated_text = soup.find('div', {'class': app_settings.GOOGLE_RESULT_DIV_CONTAINER_CLASS}).text
     
     return translated_text
