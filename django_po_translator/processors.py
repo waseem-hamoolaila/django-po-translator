@@ -9,7 +9,7 @@ import django_po_translator.app_settings as app_settings
 
 
 
-def process_lines(lines, lan, update_already_translated=False, resolve_fuzzy=False):
+def process_lines(command:BaseCommand, lines, lan, update_already_translated=False, resolve_fuzzy=False):
     """
     parse msgid and msgid and apply the translation to a new list
     
@@ -20,12 +20,15 @@ def process_lines(lines, lan, update_already_translated=False, resolve_fuzzy=Fal
     processed_lines = lines
     try:
         processed_lines = []
+        counter = 0
         for index, line in enumerate(lines):
             if is_message_str(line):
                 # update even if the msgstr already provided
                 if update_already_translated:
+                    counter += 1
                     processed_lines = translate_msgstr_line_as_list(processed_lines, lines, index, lan)                    
                 else:
+                    counter += 1
                     msgstr = get_str(line)
                     if msgstr == '':
                         processed_lines = translate_msgstr_line_as_list(processed_lines, lines, index, lan)
@@ -33,7 +36,7 @@ def process_lines(lines, lan, update_already_translated=False, resolve_fuzzy=Fal
                         # msgstr already provided ... keep it as it is
                         processed_lines.append(line)
                 
-                time.sleep(2) # to avoid high demand on the server
+                command.stdout.write(f"Progress: {counter}", end='\r')
                     
             else:
                 processed_lines.append(line)
@@ -203,7 +206,7 @@ def action(command:BaseCommand, translate_existed, resolve_fuzzy):
                 
         if lines:
             with open(po_file_path, 'w', encoding='utf-8') as po_file:
-                result, processed_list = process_lines(lines=lines, lan=po_file_language, 
+                result, processed_list = process_lines(command=command, lines=lines, lan=po_file_language, 
                                                update_already_translated=translate_existed, 
                                                resolve_fuzzy=resolve_fuzzy)
                 for line in processed_list:
