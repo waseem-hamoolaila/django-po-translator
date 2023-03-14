@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django_po_translator',
-    version='2.1.0',
+    version='2.1.1',
     description='Your package description',
     packages=find_packages(),
     install_requires=[

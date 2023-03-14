@@ -1,2 +1,3 @@
-recursive-include your_package_name/templates *
-recursive-include your_package_name/static *
+recursive-include django_po_translator/templates *
+recursive-include django_po_translator/static *
+recursive-include django_po_translator/management *
