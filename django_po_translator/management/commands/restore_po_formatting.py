@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 import os
 
-import po_translator.app_settings as app_settings
+import django_po_translator.app_settings as app_settings
 
 
 class Command(BaseCommand):

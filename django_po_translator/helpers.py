@@ -4,7 +4,7 @@ from django.core.management import BaseCommand
 from .translate import translate_text
 from halo import Halo
 
-import po_translator.app_settings as app_settings
+import django_po_translator.app_settings as app_settings
 
 
 
