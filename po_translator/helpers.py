@@ -21,33 +21,57 @@ def process_lines(lines, lan, update_already_translated=False, resolve_fuzzy=Fal
         if is_message_str(line):
             # update even if the msgstr already provided
             if update_already_translated:
-                processed_lines = translate_msgstr_line(processed_lines, lines, index, lan)    
+                processed_lines = translate_msgstr_line_as_list(processed_lines, lines, index, lan)    
                                 
             else:
                 msgstr = get_str(line)
                 if msgstr == '':
-                    processed_lines = translate_msgstr_line(processed_lines, lines, index, lan)
+                    processed_lines = translate_msgstr_line_as_list(processed_lines, lines, index, lan)
                 else:
                     # msgstr already provided ... keep it as it is
                     processed_lines.append(line)
         else:
-            
             processed_lines.append(line)
-            
-            if update_already_translated and resolve_fuzzy and is_fuzzy(lines=processed_lines, msgstr_index=index):
-                del processed_lines[index - 1]
-                
+    
+    # We will handle the fuzziness after the whole translation is done ... to reduce the complexity
+    # it will increase the time of executing ... but to avoid un-calculated actions
+    
+    if resolve_fuzzy:
+        processed_lines = clear_fuzziness(lines, lan)
     
     return processed_lines
 
 
-def translate_msgstr_line(processed_lines:list, lines:list, index, lan):
+def translate_msgstr_line_as_list(processed_lines:list, lines:list, index, lan):
     msgid = get_msgid(lines, msgstr_index=index)
     translated_text = fetch_translation(text=msgid, lan=lan)
-    processed_lines.append('msgstr "' + translated_text + '"\n' )
+    processed_lines.append('msgstr "' + translated_text + '"\n')
     
     return processed_lines
 
+
+def clear_fuzziness(lines:list, lan):
+    cleaned_list = []
+    indexes_to_be_removed = []
+    for index, line in enumerate(lines):
+        if is_fuzzy(lines, index):
+            if is_message_str(line):
+                msgid = get_msgid(lines, msgstr_index=index)
+                translated_text = fetch_translation(text=msgid, lan=lan)
+                cleaned_list.append('msgstr "' + translated_text + '"\n')
+                # todo: remove the #, fuzzy       
+                
+                indexes_to_be_removed.append(index - 2)
+            else:
+                cleaned_list.append(line)
+        else:
+            cleaned_list.append(line)
+            
+    if len(indexes_to_be_removed) > 0:
+        cleaned_list = [cleaned_list[i] for i in range(len(cleaned_list)) if i not in indexes_to_be_removed]
+  
+    return cleaned_list
+    
 
 def is_message_id(line) -> bool:
     """ 
@@ -104,7 +128,7 @@ def fetch_translation(text, lan):
 def is_fuzzy(lines, msgstr_index):
     """ Determine whether this translation is fuzzy """
     try:
-        return lines[msgstr_index - 1].split("\n")[0] == "#, fuzzy"
+        return lines[msgstr_index - 2].split("\n")[0] == "#, fuzzy"
     except:
         return False
 
