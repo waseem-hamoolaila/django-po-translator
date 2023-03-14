@@ -1,28 +1,21 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
-    name='django-po-translator',
+    name='django_po_translator',
     version='1.0.0',
     description='Your package description',
-    packages=['django_po_translator', ],
+    packages=find_packages(),
     install_requires=[
         'Django>=2.2.0',
         'beautifulsoup4',
-        'hola',
+        'halo',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
-        'Framework :: Django',
     ],
-    url='https://github.com/your_username/your_package_name',
+    url='https://github.com/waseem-hamoolaila/django-po-translator',
     author='Waseem Hamoolaila',
-    author_email='waseem.97.laila@gmai.com',
+    author_email='waseem.97.laila@gmail.com',
 )
