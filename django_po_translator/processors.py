@@ -20,7 +20,7 @@ def process_lines(command:BaseCommand, lines, lan, update_already_translated=Fal
     try:
         processed_lines = []
         for index, line in enumerate(lines):
-            if is_message_str(line):
+            if is_msgstr(line):
                 # update even if the msgstr already provided
                 if update_already_translated:
                     processed_lines = translate_msgstr_line_as_list(processed_lines, lines, index, lan)                    
@@ -60,7 +60,7 @@ def clear_fuzziness(lines:list, lan):
     indexes_to_be_removed = []
     for index, line in enumerate(lines):
         if is_fuzzy(lines, index):
-            if is_message_str(line):
+            if is_msgstr(line):
                 msgid = get_msgid(lines, msgstr_index=index)
                 translated_text = fetch_translation(text=msgid, lan=lan)
                 cleaned_list.append('msgstr "' + translated_text + '"\n')
@@ -92,7 +92,7 @@ def is_message_id(line) -> bool:
         return False
 
 
-def is_message_str(line):
+def is_msgstr(line):
     """ 
     Return if the line is message str
     
@@ -108,7 +108,7 @@ def is_message_str(line):
 
 def get_str(line):
     """ Return the string is exist and None if the msgstr is empty """
-    if is_message_str(line): # TODO remove if not necessary
+    if is_msgstr(line): # TODO remove if not necessary
         return line.split('"')[1] if line.split('"')[1] != '"' else None
 
 
