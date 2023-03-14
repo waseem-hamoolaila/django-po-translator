@@ -220,6 +220,6 @@ def action(command:BaseCommand, translate_existed, resolve_fuzzy):
         else:
             command.stdout.write(command.style.WARNING(f"\n{po_file_language} Po file is empty .. no translations were added."))
 
-        command.stdout.write("\n\nProcess completed .. you should compile your messages now to reflect new translations.\n\n")
-
         spinner.stop()
+    
+    command.stdout.write("\n\nProcess completed .. you should compile your messages now to reflect new translations.\n\n")
