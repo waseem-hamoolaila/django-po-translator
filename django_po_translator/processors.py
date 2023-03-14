@@ -36,7 +36,8 @@ def process_lines(command:BaseCommand, lines, lan, update_already_translated=Fal
                         # msgstr already provided ... keep it as it is
                         processed_lines.append(line)
                 
-                command.stdout.write(f"Progress: {counter}", end='\r')
+                command.stdout.write(f"\r{counter} word has been processed", ending='')
+                command.stdout.flush()
                     
             else:
                 processed_lines.append(line)
