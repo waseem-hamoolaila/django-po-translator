@@ -165,8 +165,13 @@ def action(command:BaseCommand, translate_existed, resolve_fuzzy):
         
     command.stdout.write("\nRun make messages \n")
     
-    os.system('python manage.py makemessages -a')
-    command.stdout.write(command.style.SUCCESS("make messages ... Ok \n\n"))
+    result = os.system('python manage.py makemessages -a')
+    
+    if os.WEXITSTATUS(result) != 0:
+        command.stdout.write(command.style.ERROR("Failed to make messages .. please fix the issue mentioned above then try again \n\n"))
+        return
+    else:
+        command.stdout.write(command.style.SUCCESS("make messages ... Ok \n\n"))
     
     command.stdout.write("Reformatting PO files \n")
     os.system('python manage.py restore_po_formatting')
