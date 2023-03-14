@@ -2,6 +2,8 @@
 
 Django package allows you to translate PO files automatically and fix all the fuzziness in your files ... with only one command
 
+The package will detect all your PO files and translate or fix them based on the file language ... without any interaction by you.
+
 
 # Installation 
 

@@ -19,15 +19,12 @@ def process_lines(command:BaseCommand, lines, lan, update_already_translated=Fal
     processed_lines = lines
     try:
         processed_lines = []
-        counter = 0
         for index, line in enumerate(lines):
             if is_message_str(line):
                 # update even if the msgstr already provided
                 if update_already_translated:
-                    counter += 1
                     processed_lines = translate_msgstr_line_as_list(processed_lines, lines, index, lan)                    
                 else:
-                    counter += 1
                     msgstr = get_str(line)
                     if msgstr == '':
                         processed_lines = translate_msgstr_line_as_list(processed_lines, lines, index, lan)
