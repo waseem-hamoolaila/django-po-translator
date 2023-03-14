@@ -90,7 +90,7 @@ def fetch_translation(text, lan):
 
 
 
-def action(command:BaseCommand):
+def action(command:BaseCommand, translate_existed):
     """ 
     Apply the actions into the PO files
     
@@ -128,7 +128,8 @@ def action(command:BaseCommand):
                 
         if lines:
             with open(po_file_path, 'w', encoding='utf-8') as po_file:
-                processed_list = process_lines(lines=lines, lan=po_file_language)
+                processed_list = process_lines(lines=lines, lan=po_file_language, 
+                                               update_already_translated=translate_existed)
                 for line in processed_list:
                     po_file.write(line)
         else:

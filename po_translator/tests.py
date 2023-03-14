@@ -14,4 +14,4 @@ class TestPoTranslator(TestCase):
         
         translated_text = translate_text(text="Hello",target_language="ar")
         
-        self.assertIsNotNone(translate_text)
+        self.assertIsNotNone(translated_text)
