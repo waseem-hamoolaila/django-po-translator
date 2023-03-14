@@ -5,14 +5,14 @@ Django package allows you to translate PO files automatically ... with only one 
 
 # Installation 
 
-## Install the package
+### Install the package
 
 ```
 pip install django-po-translator
 
 ```
 
-## Add the package to your installed apps
+### Add the package to your installed apps
 
 ```
 INSTALLED_APPS = [
@@ -21,3 +21,7 @@ INSTALLED_APPS = [
     ...
 ]
 ```
+
+### Important steps
+
+Make sure your app is ready to support localization ... you should have locale folder in the root of your project and all related settings are added.
