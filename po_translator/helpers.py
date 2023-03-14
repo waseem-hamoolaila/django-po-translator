@@ -5,6 +5,8 @@ from .translate import translate_text
 
 import po_translator.app_settings as app_settings
 
+
+
 def process_lines(lines, lan, update_already_translated=False, resolve_fuzzy=False):
     """
     parse msgid and msgid and apply the translation to a new list
@@ -20,6 +22,7 @@ def process_lines(lines, lan, update_already_translated=False, resolve_fuzzy=Fal
             # update even if the msgstr already provided
             if update_already_translated:
                 processed_lines = translate_msgstr_line(processed_lines, lines, index, lan)    
+                                
             else:
                 msgstr = get_str(line)
                 if msgstr == '':
@@ -28,7 +31,12 @@ def process_lines(lines, lan, update_already_translated=False, resolve_fuzzy=Fal
                     # msgstr already provided ... keep it as it is
                     processed_lines.append(line)
         else:
+            
             processed_lines.append(line)
+            
+            if update_already_translated and resolve_fuzzy and is_fuzzy(lines=processed_lines, msgstr_index=index):
+                del processed_lines[index - 1]
+                
     
     return processed_lines
 
@@ -74,6 +82,7 @@ def get_str(line):
     if is_message_str(line): # TODO remove if not necessary
         return line.split('"')[1] if line.split('"')[1] != '"' else None
 
+
 def get_msgid(lines, msgstr_index):
     """ Return the msgid of a given msgstr index """
     try:
@@ -95,7 +104,7 @@ def fetch_translation(text, lan):
 def is_fuzzy(lines, msgstr_index):
     """ Determine whether this translation is fuzzy """
     try:
-        return lines[msgstr_index - 2].split("\n")[0] == "#, fuzzy"
+        return lines[msgstr_index - 1].split("\n")[0] == "#, fuzzy"
     except:
         return False
 
