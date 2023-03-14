@@ -35,5 +35,8 @@ Make sure your app is ready to support localization ... you should have *locale*
 
 ### po-translator command arguments
 
-- --translate-existed: This argument will allow the command to translate the already existed translation .. use it carefully .. as it will override all your existing translations
-- --resolve-fuzzy: This argument will resolve all fuzzy translations in your po file
+- **--translate-existed**: This argument will allow the command to translate the already existed translation .. use it carefully .. as it will override all your existing translations
+- **--resolve-fuzzy**: This argument will resolve all fuzzy translations in your po file
+
+Ex: ` python manage.py translate --translate-existed --resolve-fuzzy `
+
