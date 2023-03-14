@@ -1,14 +1,12 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.conf import settings
-import po_translator.app_settings as app_settings
 import os
+
+import po_translator.app_settings as app_settings
 
 
 class Command(BaseCommand):
     help = 'Restore a po file to its original format'
-
-    # def add_arguments(self, parser):
-    #     parser.add_argument('language', nargs='+', type=str)
 
     def handle(self, *args, **options):
         # languages = options['language']
@@ -21,7 +19,7 @@ class Command(BaseCommand):
                 languages.append(language[0])
         
         for language in languages:
-            po_path = os.path.join(locale_dir, language, 'LC_MESSAGES', 'django.po')
+            po_path = os.path.join(locale_dir, language, 'LC_MESSAGES', app_settings.PO_FILES_NAME)
             # save a backup
             po_backup_path = os.path.join(locale_dir, language, 'LC_MESSAGES', 'django.po.bak')
             po_clean_path = os.path.join(locale_dir, language, 'LC_MESSAGES', 'django.po.clean')
