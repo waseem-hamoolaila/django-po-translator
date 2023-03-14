@@ -8,7 +8,7 @@ import django_po_translator.app_settings as app_settings
 
 
 
-def process_lines(command:BaseCommand, lines, lan, update_already_translated=False, resolve_fuzzy=False):
+def lines_processor(lines, lan, update_already_translated=False, resolve_fuzzy=False):
     """
     parse msgid and msgid and apply the translation to a new list
     
@@ -41,7 +41,7 @@ def process_lines(command:BaseCommand, lines, lan, update_already_translated=Fal
         
         return True, processed_lines
     except:
-        
+        # In case failed ... return the backup tp prevent any lose of data.
         return False, backup_lines
 
 
@@ -204,7 +204,7 @@ def action(command:BaseCommand, translate_existed, resolve_fuzzy):
                 
         if lines:
             with open(po_file_path, 'w', encoding='utf-8') as po_file:
-                result, processed_list = process_lines(command=command, lines=lines, lan=po_file_language, 
+                result, processed_list = lines_processor(lines=lines, lan=po_file_language, 
                                                update_already_translated=translate_existed, 
                                                resolve_fuzzy=resolve_fuzzy)
                 for line in processed_list:

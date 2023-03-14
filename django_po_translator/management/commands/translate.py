@@ -2,7 +2,7 @@ import os
 from django.core.management import BaseCommand
 from django.conf import settings  
 
-from django_po_translator.processors import process_lines, action
+from django_po_translator.processors import lines_processor, action
 
 class Command(BaseCommand):
     
