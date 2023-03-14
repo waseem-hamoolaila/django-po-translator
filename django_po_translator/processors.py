@@ -78,7 +78,7 @@ def clear_fuzziness(lines:list, lan):
     return cleaned_list
     
 
-def is_message_id(line) -> bool:
+def is_msgid(line) -> bool:
     """ 
     Return if the line is message id 
     
