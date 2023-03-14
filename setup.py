@@ -1,10 +1,10 @@
 from setuptools import setup
 
 setup(
-    name='your_package_name',
+    name='django-po-translator',
     version='1.0.0',
     description='Your package description',
-    packages=['your_app'],
+    packages=['po_translator'],
     install_requires=[
         'Django>=2.2.0',
         'beautifulsoup4',
