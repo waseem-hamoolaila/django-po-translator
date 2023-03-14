@@ -21,8 +21,6 @@ class Command(BaseCommand):
         translate_existed = options.get('translate-existed', False)
         resolve_fuzzy = options.get('resolve-fuzzy', False)
         
-        res, cause = action(command=self, translate_existed=translate_existed, 
+        action(command=self, translate_existed=translate_existed, 
                             resolve_fuzzy=resolve_fuzzy)
-        
-        print(res, cause)
-        
+                

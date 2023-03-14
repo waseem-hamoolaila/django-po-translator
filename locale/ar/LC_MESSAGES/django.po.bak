@@ -19,20 +19,26 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
+#: django_po_translator/settings.py:123
 msgid "ar"
 msgstr "أر"
 
+#: django_po_translator/settings.py:124
 msgid "en"
 msgstr "في"
 
+#: test_app/models.py:6
 msgid "Hello"
 msgstr "مرحبًا"
 
+#: test_app/models.py:7
 msgid "Helo"
 msgstr "مرحبا"
 
+#: test_app/models.py:10
 msgid "Test"
 msgstr "امتحان"
 
+#: test_app/models.py:11
 msgid "Tests"
 msgstr "الاختبارات"
