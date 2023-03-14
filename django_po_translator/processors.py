@@ -3,7 +3,6 @@ from django.conf import settings
 from django.core.management import BaseCommand
 from .translate import translate_text
 from halo import Halo
-import time
 
 import django_po_translator.app_settings as app_settings
 
@@ -35,10 +34,6 @@ def process_lines(command:BaseCommand, lines, lan, update_already_translated=Fal
                     else:
                         # msgstr already provided ... keep it as it is
                         processed_lines.append(line)
-                
-                command.stdout.write(f"\r{counter} word has been processed", ending='')
-                command.stdout.flush()
-                    
             else:
                 processed_lines.append(line)
         
