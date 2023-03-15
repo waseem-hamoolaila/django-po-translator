@@ -33,6 +33,7 @@ Make sure your app is ready to support localization ... you should have *locale*
 
 - After installing the package and making sure that all is looking fine
 - Run ` python manage.py translate ` *Extra arguments will be mentioned down*
+- You will need to compile messages to reflect the new translations
 - Enjoy :) 
 
 ### po-translator command arguments

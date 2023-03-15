@@ -38,3 +38,4 @@ htmlcov/
 .env
 .vscode/*
 *.db-journal
+dist/*
