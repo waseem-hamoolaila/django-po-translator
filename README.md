@@ -4,6 +4,8 @@ Django package allows you to translate PO files automatically and fix all the fu
 
 The package will detect all your PO files and translate or fix them based on the file language ... without any interaction by you.
 
+You can check the [PyPl](https://pypi.org/project/django-po-translator/) for more information.
+
 
 # Installation
 
@@ -47,3 +49,7 @@ Ex: ` python manage.py translate --translate-existed --resolve-fuzzy `
 ### Tests
 
 To run tests ` python manage.py test django_po_translator `
+
+### Note
+
+If you have any issue while using the package ... don't hesitate to report it and it will be fixed ASAP. Thank you.
