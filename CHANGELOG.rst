@@ -3,6 +3,12 @@ django-po-translator changelog
 ================================
 
 
+version 0.1.3 15-03-2023
+-------------------------
+
+* Fix inclusive files
+
+
 version 0.1.2 15-03-2023
 -------------------------
 
