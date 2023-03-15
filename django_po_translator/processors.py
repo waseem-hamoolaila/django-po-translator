@@ -144,6 +144,8 @@ def action(command:BaseCommand, translate_existed, resolve_fuzzy):
     
     args 
     - command: the command that is calling this function
+    - translated_existed: bool: process already translated words
+    - resolve_fuzzy: bool: remove and fix all fuzzy words
     
     return bool, string
     """
@@ -213,10 +215,11 @@ def action(command:BaseCommand, translate_existed, resolve_fuzzy):
             if result:
                 command.stdout.write(command.style.SUCCESS(f"\n{po_file_language} Po file have been processed ... Ok"))
             else:
-                command.stdout.write(command.style.ERROR(f"\nUnexpected issue while processing {len(po_files_paths)} Po file, all changes have been reverted."))
+                command.stdout.write(command.style.ERROR(f"\nUnexpected issue while processing {po_file_language} Po file, all changes have been reverted."))
         else:
             command.stdout.write(command.style.WARNING(f"\n{po_file_language} Po file is empty .. no translations were added."))
 
         spinner.stop()
     
     command.stdout.write("\n\nProcess completed .. you should compile your messages now to reflect new translations.\n\n")
+    return True
