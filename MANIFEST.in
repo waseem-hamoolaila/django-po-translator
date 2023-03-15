@@ -1,6 +1,0 @@
-include README.md
-include django_po_translator/test_files/test_po.po
-
-recursive-include django_po_translator/test_files *
-recursive-include django_po_translator/management/commands *
-
