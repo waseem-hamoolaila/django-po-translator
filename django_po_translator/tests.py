@@ -15,7 +15,7 @@ class TestPoTranslator(test.TestCase):
           
      def test_action_processor(self):
           lines = None
-          po_test_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'tests', 'test_po.po'))
+          po_test_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'test_po.po'))
           with open(po_test_file_path, 'r', encoding='utf-8') as po_file:
                lines = po_file.readlines()
                
@@ -25,7 +25,7 @@ class TestPoTranslator(test.TestCase):
      def test_line_processor(self):
           
           lines = None
-          po_test_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'tests', 'test_po.po'))
+          po_test_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'test_po.po'))
           with open(po_test_file_path, 'r', encoding='utf-8') as po_file:
                lines = po_file.readlines()
                
@@ -38,7 +38,7 @@ class TestPoTranslator(test.TestCase):
      def test_line_processor_after_fixing_fuzziness(self):
           
           lines = None
-          po_test_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'tests', 'test_po.po'))
+          po_test_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'test_po.po'))
           with open(po_test_file_path, 'r', encoding='utf-8') as po_file:
                lines = po_file.readlines()
           
@@ -53,7 +53,7 @@ class TestPoTranslator(test.TestCase):
      def test_line_processor_without_fixing_fuzziness(self):
           
           lines = None
-          po_test_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'tests', 'test_po.po'))
+          po_test_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'test_po.po'))
           with open(po_test_file_path, 'r', encoding='utf-8') as po_file:
                lines = po_file.readlines()
           
@@ -68,7 +68,7 @@ class TestPoTranslator(test.TestCase):
      def test_line_processor_without_override_translations(self):
           
           lines = None
-          po_test_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'tests', 'test_po.po'))
+          po_test_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'test_po.po'))
           with open(po_test_file_path, 'r', encoding='utf-8') as po_file:
                lines = po_file.readlines()
           
@@ -84,7 +84,7 @@ class TestPoTranslator(test.TestCase):
      def test_line_processor_with_override_translations(self):
           
           lines = None
-          po_test_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'tests', 'test_po.po'))
+          po_test_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'test_po.po'))
           with open(po_test_file_path, 'r', encoding='utf-8') as po_file:
                lines = po_file.readlines()
           

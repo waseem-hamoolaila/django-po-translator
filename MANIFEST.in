@@ -1,4 +1,4 @@
 include README.md
 
 recursive-include django_po_translator/management/commands *
-recursive-include django_po_translator/tests *
+
