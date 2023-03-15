@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='django_po_translator',
-    version='0.1.2',
+    version='0.1.3',
     description='Translate Django PO files and resolve fuzziness with ease.',
     long_description=long_description,
     long_description_content_type="text/markdown",
