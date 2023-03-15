@@ -222,4 +222,3 @@ def action(command:BaseCommand, translate_existed, resolve_fuzzy):
         spinner.stop()
     
     command.stdout.write("\n\nProcess completed .. you should compile your messages now to reflect new translations.\n\n")
-    return True
