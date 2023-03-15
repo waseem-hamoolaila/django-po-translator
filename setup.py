@@ -2,8 +2,8 @@ from setuptools import setup, find_packages
 
 setup(
     name='django_po_translator',
-    version='2.1.8.1',
-    description='Your package description',
+    version='0.1.0',
+    description='Translate PO files and resolve fuzziness',
     packages=find_packages(),
     install_requires=[
         'Django>=2.2.0',
