@@ -1,9 +1,16 @@
 from setuptools import setup, find_packages
 
+
+long_description = ''
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
     name='django_po_translator',
-    version='0.1.0',
-    description='Translate PO files and resolve fuzziness',
+    version='0.1.1',
+    description='Translate Django PO files and resolve fuzziness with ease.',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     packages=find_packages(),
     install_requires=[
         'Django>=2.2.0',
