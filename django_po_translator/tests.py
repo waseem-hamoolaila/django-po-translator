@@ -1,15 +1,8 @@
 from django import test
 import os 
-from django.core.management import call_command
-from django.core.management.base import CommandParser
-
-from io import StringIO
-
-from django_po_translator.management.commands.translate import BaseCommand as TranslateCommand
 
 from django_po_translator.translate import translate_text
 from django_po_translator.processors import lines_processor, action
-import django_po_translator.app_settings as app_settings
 
 
 class TestPoTranslator(test.TestCase):
