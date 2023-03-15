@@ -38,4 +38,3 @@ htmlcov/
 .env
 .vscode/*
 *.db-journal
-*.sqlite3
