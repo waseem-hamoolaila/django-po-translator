@@ -20,7 +20,7 @@ class PoTools:
             return po_file.readlines()
     
     
-    def is_msgid(po_line) -> bool:
+    def is_msgid(self, po_line) -> bool:
         """ 
         Checks if the given line is msgid
         """
@@ -32,7 +32,7 @@ class PoTools:
             return False
 
 
-    def is_msgstr(po_line):
+    def is_msgstr(self, po_line):
         """ 
         Checks is the given line is msgstr
         """
@@ -42,6 +42,9 @@ class PoTools:
             return False
         except:
             return False
+    
+    def get_text_from_msgid(self, msgid):
+        return msgid.split('"')[1] if msgid.split('"')[1] != '"' else ""
     
     def translate(self, text):
     
@@ -56,7 +59,7 @@ class PoTools:
 
     def clear_fuzziness(self):
         
-        entries = self.get_po_files_entries().split("\n")
+        entries = self.get_po_files_entries()
         processed_entries = []
         
         if not entries:
@@ -67,7 +70,8 @@ class PoTools:
             if self.is_msgstr(line):
                 # update even if the msgstr already provided
                 msgid = self.get_msgid(processed_entries=processed_entries, msgstr_index=index)
-                translated_text = self.translate(msgid)
+                text = self.get_text_from_msgid(msgid=msgid)
+                translated_text = self.translate(text=text)
                 processed_entries.append(self.reform_msgstr(translated_text))
                 
             else:
@@ -82,5 +86,11 @@ class PoTools:
              for processed_line in processed_entries:
                 po_file.write(processed_line) 
                 
+    
+    def initial_resolve_fuzziness(self):
+        
+        processed_entries = self.clear_fuzziness()
+        self.update_po_dir(processed_entries=processed_entries)
+        
         
     
