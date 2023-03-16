@@ -1,9 +1,10 @@
 import os
 from django.core.management import BaseCommand
-from django.conf import settings  
-from django_po_translator.helpers import get_po_files_path, get_all_po_files_paths, reformat_po_file, run_make_messages
+from django_po_translator.helpers import get_all_po_files_paths, reformat_po_file, run_make_messages
+
 
 from django_po_translator.po_processor import PoProcessor
+
 
 class Command(BaseCommand):
     
