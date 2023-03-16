@@ -12,7 +12,7 @@ def get_all_po_files_paths():
     paths = []
     
     for language in settings.LANGUAGES:
-        if os.path.exists(get_po_files_path(language)):
-            paths.append([get_po_files_path(), language])
+        if os.path.exists(get_po_files_path(language[0])):
+            paths.append([get_po_files_path(language[0]), language[0]])
             
     return paths

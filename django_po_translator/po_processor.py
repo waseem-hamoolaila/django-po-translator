@@ -73,7 +73,7 @@ class PoProcessor:
             if self.is_msgstr(entry) and self.is_missing_translation(entry):
                 number += 1
                 
-        return number
+        return number - 1
 
     def get_total_translation(self):
         
@@ -84,7 +84,7 @@ class PoProcessor:
             if self.is_msgstr(entry):
                 number += 1
                 
-        return number
+        return number - 1
     
     def clear_fuzziness(self):
         """ Translate Only fuzzy words and resolve it """
@@ -127,7 +127,6 @@ class PoProcessor:
             else:
                 processed_entries.append(line)
         
-                
         return True, processed_entries
     
     def translate_all(self):
@@ -146,8 +145,7 @@ class PoProcessor:
                 processed_entries.append(self.reform_msgstr(translated_text))
             else:
                 processed_entries.append(line)
-        
-                
+                        
         return True, processed_entries
     
     def update_po_dir(self, processed_entries):
@@ -174,10 +172,10 @@ class PoProcessor:
             result, processed_entries = self.translate_all()
             self.update_po_dir(processed_entries=processed_entries)
             
-            return
+            return result
         
         result, processed_entries = self.translate_missing()
         self.update_po_dir(processed_entries=processed_entries)
-        
+                
         return result
         
