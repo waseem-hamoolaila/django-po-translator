@@ -58,6 +58,7 @@ class Command(BaseCommand):
         
         if not result:
              self.stdout.write(self.style.ERROR("failed \n"))
+             self.stdout.write(self.style.ERROR("Check the error mentioned in the log. \n"))
              return
         
         self.stdout.write(self.style.SUCCESS("success \n"))
