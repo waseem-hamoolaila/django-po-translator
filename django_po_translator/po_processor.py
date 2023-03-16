@@ -18,8 +18,7 @@ class PoProcessor:
         """
         with open(self.po_file_path, 'r', encoding='utf-8') as po_file:
             return po_file.readlines()
-    
-    
+        
     def is_msgid(self, po_line) -> bool:
         """ 
         Checks if the given line is msgid
@@ -30,7 +29,6 @@ class PoProcessor:
             return False
         except:
             return False
-
 
     def is_msgstr(self, po_line):
         """ 
@@ -54,7 +52,6 @@ class PoProcessor:
     def translate(self, text):
         return translate_text(text=text, target_language=self.target_language)
 
-
     def reform_msgstr(self, translated_text):
         """ Reform msgid to PO format """
         return 'msgstr "' + translated_text + '"\n'
@@ -66,7 +63,29 @@ class PoProcessor:
     def is_missing_translation(self, po_line):
         """ Checks if the given po line is not translated """
         return po_line.split('"')[1] == ""
+    
+    def get_number_of_missing_trans(self):
+        
+        processed_entries = self.get_po_files_entries()
+        number = 0
+        
+        for entry in processed_entries:
+            if self.is_msgstr(entry) and self.is_missing_translation(entry):
+                number += 1
+                
+        return number
 
+    def get_total_translation(self):
+        
+        processed_entries = self.get_po_files_entries()
+        number = 0
+        
+        for entry in processed_entries:
+            if self.is_msgstr(entry):
+                number += 1
+                
+        return number
+    
     def clear_fuzziness(self):
         """ Translate Only fuzzy words and resolve it """
         entries = self.get_po_files_entries()
@@ -91,8 +110,6 @@ class PoProcessor:
         
         return processed_entries
     
-
-    
     def translate_missing(self):
         """ Translate only records with missing translations """
         entries = self.get_po_files_entries()
@@ -112,7 +129,6 @@ class PoProcessor:
         
                 
         return processed_entries
-    
     
     def translate_all(self):
         """ Translation all records without resolving fuzziness """
@@ -134,19 +150,16 @@ class PoProcessor:
                 
         return processed_entries
     
-    
     def update_po_dir(self, processed_entries):
         """ Update the correspondent PO file """
         with open(self.po_file_path, 'w', encoding='utf-8') as po_file:  
              for processed_line in processed_entries:
                 po_file.write(processed_line) 
                 
-    
     def initial_resolve_fuzziness(self):
         """ Initial resolving fuzziness process """
         processed_entries = self.clear_fuzziness()
         self.update_po_dir(processed_entries=processed_entries)
-        
         
     def initial_translation_process(self, all=False):
         """ 
