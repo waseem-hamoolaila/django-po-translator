@@ -8,6 +8,7 @@ from django_po_translator.po_processor import PoTools
 class Command(BaseCommand):
     
     help = 'Manage Django PO files.'
+    # TODO: redo this section
     
     def add_arguments(self, parser):
         parser.add_argument('--translate-existed', dest='translate-existed', action='store_true', 
@@ -28,4 +29,4 @@ class Command(BaseCommand):
         po_path = os.path.join(os.getcwd(), 'locale', 'ar', 'LC_MESSAGES', 'django.po')
         po_tool = PoTools(po_file_path=po_path, target_language='ar')
         
-        po_tool.initial_resolve_fuzziness()
+        po_tool.initial_translation_process(all=True)
