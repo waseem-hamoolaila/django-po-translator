@@ -2,8 +2,7 @@ import os
 from django.core.management import BaseCommand
 from django.conf import settings  
 
-from django_po_translator.po_processor import PoTools
-# from django_po_translator.processors import lines_processor, action
+from django_po_translator.po_processor import PoProcessor
 
 class Command(BaseCommand):
     
@@ -23,10 +22,9 @@ class Command(BaseCommand):
         translate_existed = options.get('translate-existed', False)
         resolve_fuzzy = options.get('resolve-fuzzy', False)
         
-        # action(command=self, translate_existed=translate_existed, 
-        #                     resolve_fuzzy=resolve_fuzzy)
+        # TODO: Enhance the interface
         
         po_path = os.path.join(os.getcwd(), 'locale', 'ar', 'LC_MESSAGES', 'django.po')
-        po_tool = PoTools(po_file_path=po_path, target_language='ar')
+        po_tool = PoProcessor(po_file_path=po_path, target_language='ar')
         
         po_tool.initial_translation_process(all=True)

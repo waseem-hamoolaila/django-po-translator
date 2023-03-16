@@ -2,7 +2,7 @@
 from django_po_translator.translate import translate_text
 
 
-class PoTools:
+class PoProcessor:
     """ 
     Collection of tools could be used in order to process PO files
     """
