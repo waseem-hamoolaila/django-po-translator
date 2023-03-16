@@ -44,7 +44,10 @@ class Command(BaseCommand):
             po_tool = PoProcessor(po_file_path=path[0], target_language=path[1])
             self.stdout.write(f"Processing {path[1]}: Total {po_tool.get_total_translation()} - Missing: {po_tool.get_number_of_missing_trans()}")
             
-            po_tool.initial_translation_process(all=True)
+            result = po_tool.initial_translation_process(all=True)
             
             self.stdout.write(f"Finished processing {path[1]} file, the result is .....", ending=" ")
-            self.stdout.write(self.style.SUCCESS("Success"))
+            if result:
+                self.stdout.write(self.style.SUCCESS("Success"))
+            else: 
+                self.stdout.write(self.style.ERROR("Failed"))

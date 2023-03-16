@@ -108,7 +108,7 @@ class PoProcessor:
         
         processed_entries = [i for j, i in enumerate(processed_entries) if j not in fuzzy_indexes]
         
-        return processed_entries
+        return True, processed_entries
     
     def translate_missing(self):
         """ Translate only records with missing translations """
@@ -128,7 +128,7 @@ class PoProcessor:
                 processed_entries.append(line)
         
                 
-        return processed_entries
+        return True, processed_entries
     
     def translate_all(self):
         """ Translation all records without resolving fuzziness """
@@ -148,7 +148,7 @@ class PoProcessor:
                 processed_entries.append(line)
         
                 
-        return processed_entries
+        return True, processed_entries
     
     def update_po_dir(self, processed_entries):
         """ Update the correspondent PO file """
@@ -158,8 +158,10 @@ class PoProcessor:
                 
     def initial_resolve_fuzziness(self):
         """ Initial resolving fuzziness process """
-        processed_entries = self.clear_fuzziness()
+        result, processed_entries = self.clear_fuzziness()
         self.update_po_dir(processed_entries=processed_entries)
+        
+        return result
         
     def initial_translation_process(self, all=False):
         """ 
@@ -169,11 +171,13 @@ class PoProcessor:
         
         """
         if all:
-            processed_entries = self.translate_all()
+            result, processed_entries = self.translate_all()
             self.update_po_dir(processed_entries=processed_entries)
             
             return
         
-        processed_entries = self.translate_missing()
+        result, processed_entries = self.translate_missing()
         self.update_po_dir(processed_entries=processed_entries)
+        
+        return result
         
