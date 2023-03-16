@@ -57,6 +57,9 @@ class PoTools:
     def get_msgid(self, processed_entries, msgstr_index):
         return processed_entries[msgstr_index - 1]
 
+    def is_fuzzy_line(self, processed_entries, msgstr_index):
+        return processed_entries[msgstr_index - 2] == "#, fuzzy\n"
+
     def clear_fuzziness(self):
         
         entries = self.get_po_files_entries()
@@ -67,7 +70,7 @@ class PoTools:
         
 
         for index, line in enumerate(entries):
-            if self.is_msgstr(line):
+            if self.is_msgstr(line) and self.is_fuzzy_line(processed_entries=processed_entries, msgstr_index=index):
                 # update even if the msgstr already provided
                 msgid = self.get_msgid(processed_entries=processed_entries, msgstr_index=index)
                 text = self.get_text_from_msgid(msgid=msgid)
