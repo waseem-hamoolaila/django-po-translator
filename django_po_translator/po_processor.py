@@ -152,8 +152,9 @@ class PoProcessor:
         """ Update the correspondent PO file """
         with open(self.po_file_path, 'w', encoding='utf-8') as po_file:  
              for processed_line in processed_entries:
-                po_file.write(processed_line) 
-                
+                po_file.write(processed_line)
+    
+  
     def initial_resolve_fuzziness(self):
         """ Initial resolving fuzziness process """
         result, processed_entries = self.clear_fuzziness()
@@ -178,4 +179,5 @@ class PoProcessor:
         self.update_po_dir(processed_entries=processed_entries)
                 
         return result
+    
         
