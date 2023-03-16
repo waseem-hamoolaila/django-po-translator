@@ -60,10 +60,12 @@ class PoTools:
     def is_fuzzy_line(self, processed_entries, msgstr_index):
         return processed_entries[msgstr_index - 2] == "#, fuzzy\n"
 
+
     def clear_fuzziness(self):
         
         entries = self.get_po_files_entries()
         processed_entries = []
+        fuzzy_indexes = []
         
         if not entries:
             return False, "This file is empty"
@@ -71,17 +73,17 @@ class PoTools:
 
         for index, line in enumerate(entries):
             if self.is_msgstr(line) and self.is_fuzzy_line(processed_entries=processed_entries, msgstr_index=index):
-                # update even if the msgstr already provided
                 msgid = self.get_msgid(processed_entries=processed_entries, msgstr_index=index)
                 text = self.get_text_from_msgid(msgid=msgid)
                 translated_text = self.translate(text=text)
                 processed_entries.append(self.reform_msgstr(translated_text))
-                
+                fuzzy_indexes.append(index - 2)
             else:
                 processed_entries.append(line)
         
+        processed_entries = [i for j, i in enumerate(processed_entries) if j not in fuzzy_indexes]
+        
         return processed_entries
-    
     
     
     def update_po_dir(self, processed_entries):
