@@ -1,7 +1,7 @@
 import os
 from django.core.management import BaseCommand
 from django.conf import settings  
-from django_po_translator.helpers import get_po_files_path, get_all_po_files_paths
+from django_po_translator.helpers import get_po_files_path, get_all_po_files_paths, reformat_po_file, run_make_messages
 
 from django_po_translator.po_processor import PoProcessor
 
@@ -41,7 +41,27 @@ class Command(BaseCommand):
             self.stdout.write("Resolve fuzzy ... ", ending=' ')
             self.stdout.write(self.style.ERROR("No"))
             self.stdout.write("\n")
+        
+        
+        result = reformat_po_file()
+        self.stdout.write("Reformatting ...", ending=" ")
+        
+        if not result:
+            self.stdout.write(self.style.ERROR("failed \n"))
+            return
             
+        self.stdout.write(self.style.SUCCESS("success \n"))
+        
+        
+        result = run_make_messages()
+        self.stdout.write("Make messages ...", ending=" ")
+        
+        if not result:
+             self.stdout.write(self.style.ERROR("failed \n"))
+             self.stdout.write(self.style.ERROR("Check the error mentioned in the log. \n"))
+             return
+        
+        self.stdout.write(self.style.SUCCESS("success \n"))
         
         for path in get_all_po_files_paths():
            
